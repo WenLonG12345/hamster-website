@@ -33,6 +33,13 @@ model User {
   role     Role   @default(BASIC)
 }
 
+model Cover {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  coverImg    String
+  title       String
+  description String
+}
+
 enum Role {
   BASIC
   ADMIN

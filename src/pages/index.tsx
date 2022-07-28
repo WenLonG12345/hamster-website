@@ -5,13 +5,7 @@ import showUploadWidget from "../utils/upload-widget";
 const Home: NextPage = () => {
   return (
     <Container maxW="lg">
-      <Button
-        onClick={() => {
-          showUploadWidget();
-        }}
-      >
-        Click Me
-      </Button>
+      HOME PAGE
     </Container>
   );
 };

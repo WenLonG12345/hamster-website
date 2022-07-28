@@ -2,7 +2,7 @@
 
 declare const window: any;
 
-export default function showUploadWidget() {
+export default function showUploadWidget(tags: string[] = []) {
   window.cloudinary.openUploadWidget(
     {
       cloudName: "teo1996",
@@ -10,6 +10,7 @@ export default function showUploadWidget() {
       sources: ["local", "camera", "instagram", "facebook"],
       showAdvancedOptions: false,
       maxFiles: 20,
+      tags,
       folder: 'hamsters',
       cropping: false,
       multiple: true,
