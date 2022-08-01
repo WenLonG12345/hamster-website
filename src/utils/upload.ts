@@ -1,4 +1,5 @@
 import axios from "axios";
+import request from "./request";
 
 declare const process: {
   env: {
@@ -17,17 +18,12 @@ export default async function uploadImage(file: File) {
   formData.append("upload_preset", UPLOAD_PRESET);
   formData.append("folder", "hamsters");
 
-  const res = await axios.post(
+  const res = await request(
     `https://api.cloudinary.com/v1_1/${UPLOAD_CLOUD_NAME}/image/upload`,
-    formData
+    {
+      method: 'POST',
+      data: formData
+    }
   );
-
-  const {data, status} = res;
-
-  if(status === 200) {
-    const {securl_url} = data;
-    return securl_url;
-  }
-
-  return data;
+  return res;
 }

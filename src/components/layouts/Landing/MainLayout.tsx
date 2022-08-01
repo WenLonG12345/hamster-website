@@ -1,4 +1,5 @@
 import { Container } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -8,13 +9,16 @@ type MainLayoutProps = {
 };
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const router = useRouter();
+  const showHeader = !router.pathname.match("/admin");
   return (
     <>
-      <Header />
-      <Container maxW="container.lg" p={3}>
+      {showHeader && <Header />}
+      {/* <Container maxW="container.lg" p={3}>
         {children}
-      </Container>
-      <Footer />
+      </Container> */}
+      {children}
+      {showHeader && <Footer />}
     </>
   );
 };

@@ -17,7 +17,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
-import { headerLinks } from "../utils/constants";
+import { headerLinks } from "../../../utils/constants";
 import { useRouter } from "next/router";
 
 type HeaderProps = {

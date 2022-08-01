@@ -16,4 +16,17 @@ if(process.env.NODE_ENV === 'production') {
   prisma = global.prisma;
 }
 
+async function main() {
+  await prisma.$connect();
+}
+
+main()
+  .catch((err) => {
+    console.error(err.message);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
+
+
 export default prisma;
