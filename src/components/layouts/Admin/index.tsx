@@ -6,7 +6,7 @@ import { useDisclosure, UseDisclosureReturn } from "@chakra-ui/hooks";
 import MobileSidebar from "./sidebar/mobile";
 import { useMediaQuery } from "@chakra-ui/media-query";
 
-export const NavContext = createContext<UseDisclosureReturn>(null);
+export const NavContext = createContext<any>(null);
 
 const AdminLayout = ({ children }: any) => {
   const sidebarState = useDisclosure();
