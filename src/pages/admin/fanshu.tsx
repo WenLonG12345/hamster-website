@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+import { withLayout } from "@moxy/next-layout";
+import Admin from '.';
 
 const FanShu = () => {
   return (
@@ -6,4 +8,4 @@ const FanShu = () => {
   )
 }
 
-export default FanShu
+export default withLayout(<Admin/>)(FanShu);

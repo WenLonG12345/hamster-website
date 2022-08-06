@@ -1,11 +1,11 @@
 import { Box, Icon, IconButton, Stack, StackProps, useDisclosure } from "@chakra-ui/react";
 import React, { useContext } from "react";
-import { CgClose, CgMenu } from "react-icons/cg";
+import {RiMenuFoldFill, RiMenuUnfoldFill} from 'react-icons/ri';
 import { NavContext } from "..";
 
 const NavButton = (props: StackProps) => {
   const { onToggle, isOpen } = useContext(NavContext);
-  const icon = isOpen ? CgMenu : CgClose;
+  const icon = isOpen ? RiMenuUnfoldFill : RiMenuFoldFill;
   return (
     <IconButton
       colorScheme="brand"

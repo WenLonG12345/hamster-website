@@ -1,4 +1,4 @@
-import { Flex, Spacer, Stack, Text } from "@chakra-ui/layout";
+import { Flex, Spacer, Stack, Text, Box } from "@chakra-ui/layout";
 import React, { ReactNode } from "react";
 
 type PageHeaderProps = { children: ReactNode };
@@ -15,7 +15,7 @@ const PageHeader: React.FC<PageHeaderProps> & PageHeader = ({ children }) => {
       (child: any) => child.type.name === type && child
     );
   return (
-    <Flex w="full" direction="column" my={3}>
+    <Flex w="full" direction="column" my={3} px={10}>
       {getChild("Title")}
       <Stack direction={{ base: "column", xl: "row" }}>
         {getChild("Description")}
@@ -34,7 +34,7 @@ const Title = ({ children }: PageHeaderProps) => {
 };
 
 const Description = ({ children }: PageHeaderProps) => {
-  return <Text mr="auto" mt={5}>{children}</Text>;
+  return <Box mt={5} w='100%' >{children}</Box>;
 };
 
 const Actions = ({ children }: PageHeaderProps) => {

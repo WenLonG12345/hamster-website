@@ -1,4 +1,7 @@
-import React from 'react'
+import React from 'react';
+import { withLayout } from "@moxy/next-layout";
+import Admin from '.';
+
 
 const XiaoXiao = () => {
   return (
@@ -6,4 +9,4 @@ const XiaoXiao = () => {
   )
 }
 
-export default XiaoXiao
+export default withLayout(<Admin/>)(XiaoXiao);

@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import { getAllHamsters } from "../../../../prisma/hamster";
+import prismaClient from "../../../../prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -9,7 +9,7 @@ export default async function handler(
   try {
     switch (req.method) {
       case "GET": {
-        const hamsters = await getAllHamsters();
+        const hamsters = await prismaClient.hamster.findMany({});
         return res.status(200).json(hamsters);
       }
 
