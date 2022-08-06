@@ -16,10 +16,12 @@ const PageHeader: React.FC<PageHeaderProps> & PageHeader = ({ children }) => {
     );
   return (
     <Flex w="full" direction="column" my={3} px={10}>
-      {getChild("Title")}
+      <Flex justify='space-between'>
+        {getChild("Title")}
+        {getChild("Actions")}
+      </Flex>
       <Stack direction={{ base: "column", xl: "row" }}>
         {getChild("Description")}
-        {getChild("Actions")}
       </Stack>
     </Flex>
   );
@@ -34,11 +36,15 @@ const Title = ({ children }: PageHeaderProps) => {
 };
 
 const Description = ({ children }: PageHeaderProps) => {
-  return <Box mt={5} w='100%' >{children}</Box>;
+  return (
+    <Box mt={5} w="100%">
+      {children}
+    </Box>
+  );
 };
 
 const Actions = ({ children }: PageHeaderProps) => {
-  return <Flex ml="auto">{children}</Flex>;
+  return <Box>{children}</Box>;
 };
 
 PageHeader.Title = Title;

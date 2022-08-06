@@ -2,7 +2,7 @@
 
 declare const window: any;
 
-export default function showUploadWidget(tags: string[] = []) {
+export default function showUploadWidget(tags: string[] = [], cb: (data: any) => void) {
   window.cloudinary.openUploadWidget(
     {
       cloudName: "teo1996",
@@ -42,7 +42,7 @@ export default function showUploadWidget(tags: string[] = []) {
     },
     (err: Error, info: any) => {
       if (!err) {
-        console.log("Upload Widget event - ", info);
+        cb(info);
       }
     }
   );

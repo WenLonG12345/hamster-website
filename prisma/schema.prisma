@@ -13,24 +13,18 @@ datasource db {
 model Hamster {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
-  description String
+  description String?
   photos      Photo[]
 }
 
 model Photo {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  url       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Hamster   Hamster? @relation(fields: [hamsterId], references: [id])
-  hamsterId String?  @db.ObjectId
-}
-
-model User {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  username String
-  password String
-  role     Role   @default(BASIC)
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  url         String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  Hamster     Hamster? @relation(fields: [hamsterId], references: [id])
+  hamsterId   String?  @db.ObjectId
 }
 
 model Cover {
@@ -38,9 +32,4 @@ model Cover {
   coverImg    String
   title       String
   description String
-}
-
-enum Role {
-  BASIC
-  ADMIN
 }

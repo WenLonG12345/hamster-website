@@ -27,7 +27,7 @@ const AdminNavBar = () => {
         <Info display={["none", "flex"]} />
 
         <Spacer display={{ md: "none" }} />
-        <Text
+        {/* <Text
           textStyle="default"
           fontSize="xl"
           fontWeight="semibold"
@@ -35,7 +35,7 @@ const AdminNavBar = () => {
           display={{ md: "none" }}
         >
           {getRoute()}
-        </Text>
+        </Text> */}
         <Spacer />
         <Actions />
       </Stack>

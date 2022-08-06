@@ -32,9 +32,19 @@ const MobileSidebar = () => {
           <Stack spacing={2} fontSize="sm">
             <DrawerCloseButton />
 
-            <Info pl={5}/>
-            <NavItem name="主页" href="/admin" icon={RiDashboardLine} />
-            <NavItem name="封面" href="/admin/cover" icon={HiOutlineFolder} />
+            <Info pl={5} />
+            <NavItem
+              name="主页"
+              href="/admin"
+              icon={RiDashboardLine}
+              active={router.pathname === "/admin"}
+            />
+            <NavItem
+              name="封面"
+              href="/admin/cover"
+              icon={HiOutlineFolder}
+              active={router.pathname === "/admin/cover"}
+            />
 
             {isOpen ? (
               <Divider />

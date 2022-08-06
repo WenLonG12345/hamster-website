@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
-import { HamsterCoverArgs, HamsterCover } from "../../../types";
-import prismaClient from "../../../../prisma/client";
+import { HamsterCoverArgs, HamsterCover } from "../../types";
+import prismaClient from "../../../prisma/client";
 
 export default async function handler(
   req: NextApiRequest,

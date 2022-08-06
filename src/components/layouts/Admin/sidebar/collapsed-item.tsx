@@ -11,7 +11,7 @@ const CollapsedItem = (props: NavItem & { scheme?: string }) => {
     <Tooltip hasArrow label={props.name} placement="right">
       <LinkBox display="flex" justifyContent="center">
         <IconButton
-          colorScheme={props.active ? "brand" : props.scheme}
+          colorScheme={props.active ? "purple" : props.scheme}
           aria-label={props.name}
           variant={props.active ? "solid" : "ghost"}
           boxSize="50px"
@@ -24,24 +24,6 @@ const CollapsedItem = (props: NavItem & { scheme?: string }) => {
                   <Icon as={props.icon} fontSize="lg" />
                 </LinkOverlay>
               </NextLink>
-              {props.count && (
-                <chakra.span
-                  pos="absolute"
-                  top="-1px"
-                  right="-1px"
-                  px={3}
-                  py={3}
-                  fontSize="sm"
-                  fontWeight="bold"
-                  lineHeight="none"
-                  color="pink.100"
-                  transform="translate(50%,-50%)"
-                  bg="pink.600"
-                  rounded="full"
-                >
-                  {props.count}
-                </chakra.span>
-              )}
             </>
           }
         />

@@ -45,8 +45,18 @@ const Sidebar = () => {
       overflowX={isOpen ? "initial" : "clip"}
       whiteSpace="nowrap"
     >
-      <NavAction name="主页" href="/admin" icon={RiDashboardLine} />
-      <NavAction name="封面" href="/admin/cover" icon={HiOutlineFolder} />
+      <NavAction
+        name="主页"
+        href="/admin"
+        icon={RiDashboardLine}
+        active={router.pathname === "/admin"}
+      />
+      <NavAction
+        name="封面"
+        href="/admin/cover"
+        icon={HiOutlineFolder}
+        active={router.pathname === "/admin/cover"}
+      />
 
       {isOpen ? (
         <Divider />

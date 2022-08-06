@@ -20,11 +20,11 @@ export type NavItem = {
   name: string;
 };
 const NavItem = (props: NavItem) => {
-  const activeColor = mode("brand.600", "white");
+  const activeColor = mode("black", "white");
   const activeProps: BoxProps = {
     color: activeColor,
-    borderRightColor: props.active ? activeColor : 'transparent',
-    bg: "blackAlpha.300",
+    borderRightColor: props.active ? 'purple.500' : 'transparent',
+    bg: mode("purple.200", 'purple.700'),
   };
 
   return (
