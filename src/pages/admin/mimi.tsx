@@ -1,7 +1,6 @@
 import React from "react";
 import { withLayout } from "@moxy/next-layout";
 import Admin from ".";
-import PageHeader from "../../components/layouts/Admin/page-header";
 import { Box, Button, Heading, Text } from "@chakra-ui/react";
 
 const Mimi = () => {

@@ -23,11 +23,11 @@ import { useForm } from "react-hook-form";
 import { ParsedFilesProps, useFileUpload } from "../../hooks/use-file-upload";
 import uploadImage from "../../utils/upload";
 import { useRouter } from "next/router";
-import PageHeader from "../../components/layouts/Admin/page-header";
 import Admin from ".";
 import { useFetchAxios } from "../../utils/common";
 import { getCover, updateCoverDetails } from "../../utils/api";
 import { HamsterCover } from "../../types";
+import PageTemplate from "../../components/layouts/Admin/page-template";
 
 const Cover = () => {
   const [files, selectFiles] = useFileUpload();
@@ -99,69 +99,71 @@ const Cover = () => {
   if (!cover) return null;
 
   return (
-    <PageHeader>
-      <PageHeader.Title>封面</PageHeader.Title>
-      <PageHeader.Description>
-        <Stack spacing={5}>
-          <Center bg="blackAlpha.300" py={5} borderRadius="8px">
-            <Image
-              src={files?.source || cover.coverImg}
-              alt="preview"
-              objectFit={"contain"}
-              width="300px"
-            />
-          </Center>
+    <PageTemplate
+      title="封面"
+      content={
+        <>
+          <Stack spacing={5}>
+            <Center bg="blackAlpha.300" py={5} borderRadius="8px">
+              <Image
+                src={files?.source || cover.coverImg}
+                alt="preview"
+                objectFit={"contain"}
+                width="300px"
+              />
+            </Center>
 
-          <Button
-            onClick={() => {
-              selectFiles({
-                accept: "image/*",
-                multiple: false,
-                cb: () => {},
-              });
-            }}
-          >
-            上传封面照片
-          </Button>
-        </Stack>
+            <Button
+              onClick={() => {
+                selectFiles({
+                  accept: "image/*",
+                  multiple: false,
+                  cb: () => {},
+                });
+              }}
+            >
+              上传封面照片
+            </Button>
+          </Stack>
 
-        <Stack mt="3">
-          <FormControl isRequired>
-            <FormLabel>封面标题</FormLabel>
-            <Input
-              placeholder="封面标题"
-              {...register("title", {
-                required: "请输入封面标题",
-              })}
-            />
-            {errors.title && (
-              <FormHelperText color="red">
-                {errors.title.message}
-              </FormHelperText>
-            )}
-          </FormControl>
+          <Stack mt="3">
+            <FormControl isRequired>
+              <FormLabel>封面标题</FormLabel>
+              <Input
+                placeholder="封面标题"
+                {...register("title", {
+                  required: "请输入封面标题",
+                })}
+              />
+              {errors.title && (
+                <FormHelperText color="red">
+                  {errors.title.message}
+                </FormHelperText>
+              )}
+            </FormControl>
 
-          <FormControl isRequired>
-            <FormLabel>封面描述</FormLabel>
-            <Textarea
-              placeholder="封面描述"
-              {...register("description", {
-                required: "请输入封面描述",
-              })}
-            />
-            {errors.title && (
-              <FormHelperText color="red">
-                {errors.title.message}
-              </FormHelperText>
-            )}
-          </FormControl>
+            <FormControl isRequired>
+              <FormLabel>封面描述</FormLabel>
+              <Textarea
+                placeholder="封面描述"
+                {...register("description", {
+                  required: "请输入封面描述",
+                })}
+              />
+              {errors.title && (
+                <FormHelperText color="red">
+                  {errors.title.message}
+                </FormHelperText>
+              )}
+            </FormControl>
 
-          <Button onClick={handleSubmit(onSubmit)} isLoading={isSubmitting}>
-            保存
-          </Button>
-        </Stack>
-      </PageHeader.Description>
-    </PageHeader>
+            <Button onClick={handleSubmit(onSubmit)} isLoading={isSubmitting}>
+              保存
+            </Button>
+          </Stack>
+        </>
+      }
+    />
   );
 };
 

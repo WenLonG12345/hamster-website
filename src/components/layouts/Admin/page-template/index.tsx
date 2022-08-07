@@ -3,7 +3,7 @@ import React from "react";
 
 type PageTemplateProps = {
   title: string;
-  actions: React.ReactNode;
+  actions?: React.ReactNode;
   content: React.ReactNode;
 };
 
@@ -18,7 +18,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({
         <Text fontSize="2xl" fontWeight="semibold">
           {title}
         </Text>
-        <Box>{actions}</Box>
+        {actions && <Box>{actions}</Box>}
       </Flex>
       <Stack direction={{ base: "column", xl: "row" }}>
         <Box mt={5} w="100%">

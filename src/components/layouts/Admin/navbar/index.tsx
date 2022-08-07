@@ -1,11 +1,11 @@
-import { Flex, Spacer, Stack, Text } from "@chakra-ui/layout";
+import { Flex, Spacer, Stack } from "@chakra-ui/layout";
 import React from "react";
 import Actions from "./profile";
 import Info from "./info";
 import NavButton from "./nav-button";
 import { useRouter } from "next/router";
 import { routes } from "../sidebar";
-import { useColorModeValue } from "@chakra-ui/react";
+import { Image, useColorModeValue } from "@chakra-ui/react";
 
 const AdminNavBar = () => {
   const router = useRouter();
@@ -36,6 +36,7 @@ const AdminNavBar = () => {
         >
           {getRoute()}
         </Text> */}
+        <Image src="/logo.png" alt="logo" w="50px" display={['block', 'none']}/>
         <Spacer />
         <Actions />
       </Stack>
