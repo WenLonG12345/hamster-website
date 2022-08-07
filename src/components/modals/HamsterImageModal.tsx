@@ -39,7 +39,7 @@ const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
 
   useEffect(() => {
     if (data) {
-      setValue("description", data.description);
+      setValue("description", data?.description);
     }
   }, [data]);
 
@@ -47,7 +47,7 @@ const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
     <Modal isOpen={!!data} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalBody>
+        <ModalBody my={5}>
           <Stack spacing={3}>
             <Center >
             <Image src={data?.url} alt={data?.id} objectFit='contain' h='300px'/>
