@@ -25,7 +25,8 @@ import {
 } from "../../utils/api";
 import { useHamsterStore } from "../../hooks/useHamsterStore";
 import HamsterDescriptionModal from "../../components/modals/HamsterDescriptionModal";
-import { Hamster } from "@prisma/client";
+import { Hamster, Photo } from "@prisma/client";
+import HamsterImageModal from "../../components/modals/HamsterImageModal";
 
 const pageName = "灰灰";
 
@@ -35,6 +36,7 @@ const HuiHui = () => {
   const hamster = allHamster?.find((x) => x.name === pageName);
 
   const [editHamster, setEditHamster] = useState<Hamster | null>(null);
+  const [editPhoto, setEditPhoto] = useState<Photo | null>(null);
 
   const [photos, getPhotos] = useFetchAxiosLazy(getPhotoByHamsterId);
 
@@ -110,7 +112,7 @@ const HuiHui = () => {
             {photos?.map((x) => {
               return (
                 <Stack key={x.id}>
-                  <Box cursor="pointer">
+                  <Box cursor="pointer" onClick={() => setEditPhoto(x)}>
                     <Image
                       src={x.url}
                       alt={x.id}
@@ -129,10 +131,11 @@ const HuiHui = () => {
       <HamsterDescriptionModal
         data={editHamster}
         onClose={() => setEditHamster(null)}
-        onFinish={(data) => {
-          updateHamster(data);
-          setEditHamster(null)
-        }}
+      />
+
+      <HamsterImageModal
+        data={editPhoto}
+        onClose={() => setEditPhoto(null)}
       />
     </>
   );

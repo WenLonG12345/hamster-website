@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import {
   Button,
+  FormHelperText,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -15,18 +16,17 @@ import {
 import { Hamster } from "@prisma/client";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useHamsterStore } from "../../hooks/useHamsterStore";
 import { updateHamsterDescription } from "../../utils/api";
 
 type HamsterDescriptionModalProps = {
   data?: Hamster | null;
   onClose: () => void;
-  onFinish: (data: any) => void;
 };
 
 const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
   data,
-  onClose,
-  onFinish
+  onClose
 }) => {
   const {
     register,
@@ -37,6 +37,7 @@ const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
   } = useForm();
 
   const toast = useToast();
+  const updateHamster = useHamsterStore((state) => state.updateHamster);
 
   useEffect(() => {
     if (data) {
@@ -64,8 +65,8 @@ const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
           position: "top-right",
         });
       }
-
-      onFinish(resData);
+      updateHamster(resData);
+      onClose();
     }
   };
 
@@ -83,6 +84,11 @@ const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
               required: "请输入仓鼠描述",
             })}
           />
+          {/* {errors.description && (
+            <Text>
+              {errors.description.message}
+            </Text>
+          )} */}
         </ModalBody>
 
         <ModalFooter>
