@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
 import { HamsterCoverArgs, HamsterCover, HamsterPhotoArgs } from "../../types";
 import prismaClient from "../../../prisma/client";
+import { Photo } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,8 +20,8 @@ export default async function handler(
         const id: string = req.body;
         const result = await prismaClient.photo.findMany({
           where: {
-            hamsterId: id
-          }
+            hamsterId: id,
+          },
         });
         return res.status(200).json(result);
       }
@@ -28,6 +29,20 @@ export default async function handler(
       case "POST": {
         const data: HamsterPhotoArgs = req.body;
         const result = await prismaClient.photo.create({ data });
+        return res.status(200).json(result);
+      }
+
+      case "PATCH": {
+        const body: Photo = req.body;
+        const result = await prismaClient.photo.update({
+          where: {
+            id: body.id,
+          },
+          data: {
+            description: body.description,
+            updatedAt: new Date()
+          },
+        });
         return res.status(200).json(result);
       }
     }

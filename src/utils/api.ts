@@ -39,3 +39,10 @@ export const updateHamsterDescription = async (data: Hamster) => {
     data,
   });
 };
+
+export const updatePhotoDescription = async (data: Photo) =>  {
+  return await request("/api/photo", {
+    method: "PATCH",
+    data
+  })
+}

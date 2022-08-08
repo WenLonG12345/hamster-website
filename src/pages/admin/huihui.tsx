@@ -13,6 +13,8 @@ import {
   HStack,
   Text,
   useColorModeValue,
+  Center,
+  Flex,
 } from "@chakra-ui/react";
 import { AiOutlinePlus, AiFillEdit } from "react-icons/ai";
 import showUploadWidget from "../../utils/upload-widget";
@@ -37,6 +39,7 @@ const HuiHui = () => {
 
   const [editHamster, setEditHamster] = useState<Hamster | null>(null);
   const [editPhoto, setEditPhoto] = useState<Photo | null>(null);
+  const [photoSelect, setPhotoSelect] = useState(false);
 
   const [photos, getPhotos] = useFetchAxiosLazy(getPhotoByHamsterId);
 
@@ -64,8 +67,10 @@ const HuiHui = () => {
             </Button>
             <Button
               colorScheme="purple"
+              isLoading={photoSelect}
               leftIcon={<AiOutlinePlus />}
-              onClick={() =>
+              onClick={() => {
+                setPhotoSelect(true);
                 showUploadWidget([pageName], async (data) => {
                   const { event, info } = data;
 
@@ -85,9 +90,10 @@ const HuiHui = () => {
 
                   if (event === "close") {
                     // user close modal dialog
+                    setPhotoSelect(false);
                   }
-                })
-              }
+                });
+              }}
             >
               添加
             </Button>
@@ -112,8 +118,15 @@ const HuiHui = () => {
             <SimpleGrid columns={[2, 3, 4, 5]} spacing="10px">
               {photos?.map((x) => {
                 return (
-                  <Stack key={x.id}>
-                    <Box cursor="pointer" onClick={() => setEditPhoto(x)}>
+                  <Box key={x.id}>
+                    <Flex
+                      cursor="pointer"
+                      flexDir="column"
+                      onClick={() => setEditPhoto(x)}
+                      bg="whiteAlpha.200"
+                      borderRadius="8px"
+                      p={2}
+                    >
                       <Image
                         src={x.url}
                         alt={x.id}
@@ -121,8 +134,11 @@ const HuiHui = () => {
                         objectFit="contain"
                         fallback={<Spinner />}
                       />
-                    </Box>
-                  </Stack>
+                    </Flex>
+                    <Text noOfLines={2} m={2}>
+                      {x.description}
+                    </Text>
+                  </Box>
                 );
               })}
             </SimpleGrid>
@@ -135,7 +151,16 @@ const HuiHui = () => {
         onClose={() => setEditHamster(null)}
       />
 
-      <HamsterImageModal data={editPhoto} onClose={() => setEditPhoto(null)} />
+      <HamsterImageModal
+        data={editPhoto}
+        onClose={() => setEditPhoto(null)}
+        onFinish={() => {
+          setEditPhoto(null);
+          if (hamster) {
+            getPhotos(hamster.id);
+          }
+        }}
+      />
     </>
   );
 };
