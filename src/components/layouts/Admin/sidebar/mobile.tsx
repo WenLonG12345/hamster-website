@@ -5,7 +5,6 @@ import { RiDashboardLine } from "react-icons/ri";
 import { HiOutlineFolder } from "react-icons/hi";
 import { FiPlus, FiPower, FiSettings } from "react-icons/fi";
 import { useRouter } from "next/router";
-import { routes } from ".";
 import {
   Drawer,
   DrawerCloseButton,
@@ -14,6 +13,7 @@ import {
 } from "@chakra-ui/modal";
 import { NavContext } from "..";
 import Info from "../navbar/info";
+import { adminPageRoutes } from "../../../../utils/constants";
 
 const MobileSidebar = () => {
   const router = useRouter();
@@ -28,39 +28,38 @@ const MobileSidebar = () => {
   return (
     <Drawer isOpen={isOpen} onClose={onClose} placement="left">
       <DrawerOverlay display={["initial", "none"]}>
-        <DrawerContent layerStyle="neutral" py={8}>
+        <DrawerContent layerStyle="neutral" py={8} maxW="250px">
           <Stack spacing={2} fontSize="sm">
             <DrawerCloseButton />
-
             <Info pl={5} />
-            <NavItem
-              name="主页"
-              href="/admin"
-              icon={RiDashboardLine}
-              active={router.pathname === "/admin"}
-            />
-            <NavItem
-              name="封面"
-              href="/admin/cover"
-              icon={HiOutlineFolder}
-              active={router.pathname === "/admin/cover"}
-            />
 
-            {isOpen ? (
+            <Stack pt={2} overflowY='auto' h='85vh'>
+              <NavItem
+                name="主页"
+                href="/admin/dashboard"
+                icon={RiDashboardLine}
+                active={router.pathname === "/admin/dashboard"}
+              />
+              <NavItem
+                name="封面"
+                href="/admin/cover"
+                icon={HiOutlineFolder}
+                active={router.pathname === "/admin/cover"}
+              />
+
               <Divider />
-            ) : (
-              <Box textTransform="uppercase" px={8} pt={4}>
+              <Box textTransform="uppercase" px={8} pt={4} fontWeight='bold'>
                 鼠鼠们 🐭
               </Box>
-            )}
 
-            {routes.map((props, rid) => (
-              <NavItem
-                key={`nav-item-${rid}`}
-                active={router.pathname === props.href}
-                {...props}
-              />
-            ))}
+              {adminPageRoutes.map((props, rid) => (
+                <NavItem
+                  key={`nav-item-${rid}`}
+                  active={router.pathname === props.href}
+                  {...props}
+                />
+              ))}
+            </Stack>
           </Stack>
         </DrawerContent>
       </DrawerOverlay>

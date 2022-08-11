@@ -16,9 +16,9 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { BiUserPin } from "react-icons/bi";
 import { RiAdminLine } from "react-icons/ri";
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
-import { headerLinks } from "../../../utils/constants";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -35,33 +35,33 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
   let router = useRouter();
   let { asPath } = router;
 
-  const {data:session} = useSession();
+  const { data: session } = useSession();
 
-  const headerItem = (
-    <>
-      {headerLinks.map((link) => (
-        <NextLink href={link.route} key={link.title} passHref>
-          <Link
-            href={link.route}
-            px={2}
-            py={1}
-            rounded="md"
-            _hover={{
-              textDecoration: "none",
-              bg: "gray.300",
-              color: "gray.700",
-            }}
-            color={link.route === asPath ? "blue" : headerTitleColor}
-            onClick={isOpen ? onClose : onOpen}
-          >
-            <Text fontWeight={"bold"} noOfLines={1} fontSize={"18px"}>
-              {link.title}
-            </Text>
-          </Link>
-        </NextLink>
-      ))}
-    </>
-  );
+  // const headerItem = (
+  //   <>
+  //     {headerLinks.map((link) => (
+  //       <NextLink href={link.route} key={link.title} passHref>
+  //         <Link
+  //           href={link.route}
+  //           px={2}
+  //           py={1}
+  //           rounded="md"
+  //           _hover={{
+  //             textDecoration: "none",
+  //             bg: "gray.300",
+  //             color: "gray.700",
+  //           }}
+  //           color={link.route === asPath ? "blue" : headerTitleColor}
+  //           onClick={isOpen ? onClose : onOpen}
+  //         >
+  //           <Text fontWeight={"bold"} noOfLines={1} fontSize={"18px"}>
+  //             {link.title}
+  //           </Text>
+  //         </Link>
+  //       </NextLink>
+  //     ))}
+  //   </>
+  // );
 
   return (
     <Box
@@ -112,9 +112,11 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
             aria-label={"theme-toggle"}
           />
           <IconButton
-            icon={<RiAdminLine />}
+            icon={session ? <BiUserPin /> : <RiAdminLine />}
             aria-label="Admin Button"
-            onClick={() => session? router.push("/admin"): router.push("/login")}
+            onClick={() =>
+              session ? router.push("/admin/dashboard") : router.push("/login")
+            }
           />
         </HStack>
 
@@ -132,9 +134,11 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
             aria-label={"theme-toggle"}
           />
           <IconButton
-            icon={<RiAdminLine />}
+            icon={session ? <BiUserPin /> : <RiAdminLine />}
             aria-label="Admin Button"
-            onClick={() => session? router.push("/admin"): router.push("/login")}
+            onClick={() =>
+              session ? router.push("/admin/dashboard") : router.push("/login")
+            }
           />
         </HStack>
       </Flex>
