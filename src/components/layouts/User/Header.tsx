@@ -73,7 +73,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
       }}
       py={2}
       px={10}
-      backgroundColor={useColorModeValue("purple.200", "purple.900")}
+      // backgroundColor={useColorModeValue("purple.200", "purple.900")}
       backdropFilter="saturate(180%) blur(5px)"
       w="100%"
       pos="fixed"
