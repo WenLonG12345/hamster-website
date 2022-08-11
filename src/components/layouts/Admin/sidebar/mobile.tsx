@@ -33,7 +33,7 @@ const MobileSidebar = () => {
             <DrawerCloseButton />
             <Info pl={5} />
 
-            <Stack pt={2} overflowY='auto' h='85vh'>
+            <Stack pt={2} overflowY='auto' h='80vh'>
               <NavItem
                 name="主页"
                 href="/admin/dashboard"
