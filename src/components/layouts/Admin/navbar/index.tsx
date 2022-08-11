@@ -4,14 +4,14 @@ import Actions from "./profile";
 import Info from "./info";
 import NavButton from "./nav-button";
 import { useRouter } from "next/router";
-import { routes } from "../sidebar";
 import { Image, useColorModeValue } from "@chakra-ui/react";
+import { adminPageRoutes } from "../../../../utils/constants";
 
 const AdminNavBar = () => {
   const router = useRouter();
 
   const getRoute = () => {
-    return routes.find(({ href }) => router.pathname === href)?.name;
+    return adminPageRoutes.find(({ href }) => router.pathname === href)?.name;
   };
 
   return (
