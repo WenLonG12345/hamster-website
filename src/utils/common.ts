@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 
 export function useFetchAxiosLazy<F extends (...inputArgs: any) => Promise<any>>(func: F) {
   const [result, setResult] = useState<Awaited<ReturnType<F>>>();
+  const [isLoading, setIsLoading] = useState(true);
   return [
     result,
-    (...args: [...Parameters<F>]) => func(...args).then((res) => {
-      setResult(res);
-      return res;
-    }) as ReturnType<F>,
+    isLoading,
+    (...args: [...Parameters<F>]) => {
+      setIsLoading(true);
+      func(...args).then((res) => {
+        setResult(res);
+        setIsLoading(false);
+        return res;
+      });
+    },
   ] as const;
 }
 export function useFetchAxios<F extends (...inputArgs: any) => Promise<any>>(

@@ -39,13 +39,37 @@ const XiaoXiao = () => {
   const [editPhoto, setEditPhoto] = useState<Photo | null>(null);
   const [photoSelect, setPhotoSelect] = useState(false);
 
-  const [photos, getPhotos] = useFetchAxiosLazy(getPhotoByHamsterId);
+  const [photos, isLoading, getPhotos] = useFetchAxiosLazy(getPhotoByHamsterId);
 
   useEffect(() => {
     if (hamster) {
       getPhotos(hamster.id);
     }
   }, [hamster]);
+
+  const renderPhoto = () => {
+    if (isLoading) {
+      return <Spinner />;
+    }
+
+    if (isEmpty(photos)) {
+      return <EmptyContent />;
+    }
+
+    return (
+      <SimpleGrid columns={[2, 2, 3, 4]} spacing="10px">
+        {photos?.map((x) => {
+          return (
+            <HamsterPhoto
+              key={x.id}
+              data={x}
+              onPhotoClick={(x) => setEditPhoto(x)}
+            />
+          );
+        })}
+      </SimpleGrid>
+    );
+  };
 
   return (
     <>
@@ -115,21 +139,7 @@ const XiaoXiao = () => {
               </Text>
             </Box>
 
-            {isEmpty(photos) ? (
-              <EmptyContent />
-            ) : (
-              <SimpleGrid columns={[2, 2, 3, 4]} spacing="10px">
-                {photos?.map((x) => {
-                  return (
-                    <HamsterPhoto
-                      key={x.id}
-                      data={x}
-                      onPhotoClick={(x) => setEditPhoto(x)}
-                    />
-                  );
-                })}
-              </SimpleGrid>
-            )}
+            {renderPhoto()}
           </>
         }
       />
