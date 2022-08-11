@@ -16,11 +16,19 @@ import {
   Center,
   FormLabel,
   useToast,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
+  PopoverFooter,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Photo } from "@prisma/client";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { updatePhotoDescription } from "../../utils/api";
+import { deletePhoto, updatePhotoDescription } from "../../utils/api";
 
 type HamsterImageModalProps = {
   data?: Photo | null;
@@ -31,7 +39,7 @@ type HamsterImageModalProps = {
 const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
   data,
   onClose,
-  onFinish
+  onFinish,
 }) => {
   const {
     register,
@@ -50,10 +58,10 @@ const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
   }, [data]);
 
   const onSubmit = async (v: any) => {
-    if(data) {
-      const updateArgs: Photo = {...data, description: v.description};
+    if (data) {
+      const updateArgs: Photo = { ...data, description: v.description };
       const res = await updatePhotoDescription(updateArgs);
-      const {data: resData, status} = res;
+      const { data: resData, status } = res;
       if (status === 200) {
         toast({
           title: "编辑成功！",
@@ -73,6 +81,31 @@ const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
       onFinish();
     }
   };
+
+  const onDelete = async () => {
+    if(data) {
+      const res = await deletePhoto(data);
+      const {data: resData, status} = res;
+
+      if (status === 200) {
+        toast({
+          title: "删除成功！",
+          status: "success",
+          isClosable: true,
+          position: "top-right",
+        });
+      } else {
+        toast({
+          title: "删除失败！",
+          status: "error",
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+
+      onFinish();
+    }
+  }
 
   return (
     <Modal isOpen={!!data} onClose={onClose}>
@@ -105,9 +138,33 @@ const HamsterImageModal: React.FC<HamsterImageModalProps> = ({
         </ModalBody>
 
         <ModalFooter>
-          <Button mr={3} onClick={onClose}>
-            关闭
-          </Button>
+          <Popover placement="top">
+            <PopoverTrigger>
+              <Button mr={3}>删除</Button>
+            </PopoverTrigger>
+            <PopoverContent
+              bg={useColorModeValue("white", "blue.800")}
+              borderColor="gray.500"
+              w="200px"
+            >
+              <PopoverCloseButton />
+              <PopoverHeader fontSize="12px" fontWeight="bold" border="0">
+                删除照片
+              </PopoverHeader>
+              <PopoverBody fontSize="14px">你确定删除这张照片吗？</PopoverBody>
+              <PopoverFooter
+                border="0"
+                display="flex"
+                alignItems="center"
+                justifyContent="flex-end"
+              >
+                <Button size="sm" colorScheme="red" onClick={onDelete}>
+                  确定
+                </Button>
+              </PopoverFooter>
+            </PopoverContent>
+          </Popover>
+
           <Button colorScheme="blue" onClick={handleSubmit(onSubmit)}>
             编辑
           </Button>

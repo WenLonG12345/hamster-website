@@ -16,9 +16,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
+import { RiAdminLine } from "react-icons/ri";
 import { HamburgerIcon, CloseIcon, SunIcon, MoonIcon } from "@chakra-ui/icons";
 import { headerLinks } from "../../../utils/constants";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 
 type HeaderProps = {
   [x: string]: any;
@@ -32,6 +34,8 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
 
   let router = useRouter();
   let { asPath } = router;
+
+  const {data:session} = useSession();
 
   const headerItem = (
     <>
@@ -91,35 +95,51 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
           _hover={{ textDecoration: "none" }}
         >
           <Image src="/logo.png" alt="logo" w="50px" />
+          <Flex direction="column" lineHeight="5">
+            <Text fontSize="lg" fontWeight="semibold" textStyle="default">
+              可爱仓鼠
+            </Text>
+            <Text fontSize="sm">精彩你的每一天 ❤️</Text>
+          </Flex>
         </HStack>
 
         {/* LARGE SCREEN */}
         <HStack as="nav" spacing="4" display={{ base: "none", md: "flex" }}>
-          {headerItem}
+          {/* {headerItem} */}
           <IconButton
             icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
             onClick={toggleColorMode}
             aria-label={"theme-toggle"}
+          />
+          <IconButton
+            icon={<RiAdminLine />}
+            aria-label="Admin Button"
+            onClick={() => session? router.push("/admin"): router.push("/login")}
           />
         </HStack>
 
         {/* BASE SCREEN */}
         <HStack display={{ base: "inherit", md: "none" }} spacing={3}>
-          <IconButton
+          {/* <IconButton
             size={"md"}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={"Open Menu"}
             onClick={isOpen ? onClose : onOpen}
-          />
+          /> */}
           <IconButton
             icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
             onClick={toggleColorMode}
             aria-label={"theme-toggle"}
           />
+          <IconButton
+            icon={<RiAdminLine />}
+            aria-label="Admin Button"
+            onClick={() => session? router.push("/admin"): router.push("/login")}
+          />
         </HStack>
       </Flex>
 
-      {isOpen && (
+      {/* {isOpen && (
         <Box
           py={4}
           w={["100%", "100%", "80%"]}
@@ -130,7 +150,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
             {headerItem}
           </Stack>
         </Box>
-      )}
+      )} */}
     </Box>
   );
 };

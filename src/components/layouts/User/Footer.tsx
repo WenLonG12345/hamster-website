@@ -26,7 +26,7 @@ const Footer: React.FC<FooterProps> = ({ ...footerProps }) => {
       {...footerProps}
     >
       <Text>
-        © {new Date().getFullYear()} 仓鼠版权所有
+        © {new Date().getFullYear()} 可爱仓鼠版权所有
       </Text>
 
       {/* <Button

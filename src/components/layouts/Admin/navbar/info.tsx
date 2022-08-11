@@ -1,10 +1,19 @@
 import { Flex, Stack, StackProps, Text } from "@chakra-ui/layout";
 import { Image } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 
 const Info = (props: StackProps) => {
+  const router = useRouter();
+
   return (
-    <Stack direction="row" alignItems="center" {...props}>
+    <Stack
+      direction="row"
+      alignItems="center"
+      {...props}
+      onClick={() => router.push("/")}
+      cursor="pointer"
+    >
       <Image src="/logo.png" alt="logo" w="50px" />
       <Flex direction="column" lineHeight="5">
         <Text fontSize="lg" fontWeight="semibold" textStyle="default">

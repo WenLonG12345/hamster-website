@@ -29,6 +29,9 @@ import HamsterDescriptionModal from "../../components/modals/HamsterDescriptionM
 import { Hamster, Photo } from "@prisma/client";
 import HamsterImageModal from "../../components/modals/HamsterImageModal";
 import PageTemplate from "../../components/layouts/Admin/page-template";
+import HamsterPhoto from "../../components/HamsterPhoto";
+import EmptyContent from "../../components/layouts/Admin/empty-content";
+import { isEmpty } from "lodash";
 
 const pageName = "灰灰";
 
@@ -52,11 +55,12 @@ const HuiHui = () => {
   return (
     <>
       <PageTemplate
-        title="灰灰"
+        title={pageName}
         actions={
           <HStack>
             <Button
               leftIcon={<AiFillEdit />}
+              size="md"
               onClick={() => {
                 if (hamster) {
                   setEditHamster(hamster);
@@ -67,6 +71,7 @@ const HuiHui = () => {
             </Button>
             <Button
               colorScheme="purple"
+              size="md"
               isLoading={photoSelect}
               leftIcon={<AiOutlinePlus />}
               onClick={() => {
@@ -115,33 +120,21 @@ const HuiHui = () => {
               </Text>
             </Box>
 
-            <SimpleGrid columns={[2, 3, 4, 5]} spacing="10px">
-              {photos?.map((x) => {
-                return (
-                  <Box key={x.id}>
-                    <Flex
-                      cursor="pointer"
-                      flexDir="column"
-                      onClick={() => setEditPhoto(x)}
-                      bg="whiteAlpha.200"
-                      borderRadius="8px"
-                      p={2}
-                    >
-                      <Image
-                        src={x.url}
-                        alt={x.id}
-                        h="200px"
-                        objectFit="contain"
-                        fallback={<Spinner />}
-                      />
-                    </Flex>
-                    <Text noOfLines={2} m={2}>
-                      {x.description}
-                    </Text>
-                  </Box>
-                );
-              })}
-            </SimpleGrid>
+            {isEmpty(photos) ? (
+              <EmptyContent />
+            ) : (
+              <SimpleGrid columns={[2, 2, 3, 4]} spacing="10px">
+                {photos?.map((x) => {
+                  return (
+                    <HamsterPhoto
+                      key={x.id}
+                      data={x}
+                      onPhotoClick={(x) => setEditPhoto(x)}
+                    />
+                  );
+                })}
+              </SimpleGrid>
+            )}
           </>
         }
       />

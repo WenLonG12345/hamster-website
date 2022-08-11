@@ -1,8 +1,8 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import NextCors from "nextjs-cors";
-import { HamsterCoverArgs, HamsterCover, HamsterPhotoArgs } from "../../types";
-import prismaClient from "../../../prisma/client";
+import { HamsterCoverArgs, HamsterCover, HamsterPhotoArgs } from "../../../types";
+import prismaClient from "../../../../prisma/client";
 import { Photo } from "@prisma/client";
 
 export default async function handler(
@@ -43,6 +43,16 @@ export default async function handler(
             updatedAt: new Date()
           },
         });
+        return res.status(200).json(result);
+      }
+
+      case "DELETE": {
+        const body: Photo = req.body;
+        const result = await prismaClient.photo.delete({
+          where: {
+            id: body.id
+          }
+        })
         return res.status(200).json(result);
       }
     }

@@ -1,4 +1,4 @@
-import { Container } from "@chakra-ui/react";
+import { Box, Container } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import Footer from "./Footer";
@@ -14,10 +14,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
       {showHeader && <Header />}
-      {/* <Container maxW="container.lg" p={3}>
+      <Container maxW="container.lg" p={3} minH='85vh'>
         {children}
-      </Container> */}
-      {children}
+      </Container>
       {showHeader && <Footer />}
     </>
   );

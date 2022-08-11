@@ -27,9 +27,7 @@ export const uploadHamsterImage = async (data: HamsterPhotoArgs) => {
 };
 
 export const getPhotoByHamsterId = async (id: string): Promise<Photo[]> => {
-  const res = await request("/api/photo", {
-    data: { id },
-  });
+  const res = await request(`/api/photo/${id}`);
   return res.data;
 };
 
@@ -43,6 +41,13 @@ export const updateHamsterDescription = async (data: Hamster) => {
 export const updatePhotoDescription = async (data: Photo) =>  {
   return await request("/api/photo", {
     method: "PATCH",
+    data
+  })
+}
+
+export const deletePhoto = async (data: Photo) => {
+  return await request("/api/photo", {
+    method: "DELETE",
     data
   })
 }
