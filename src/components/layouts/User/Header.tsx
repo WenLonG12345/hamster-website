@@ -14,6 +14,7 @@ import {
   Button,
   useColorMode,
   useColorModeValue,
+  Tooltip,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { BiUserPin } from "react-icons/bi";
@@ -63,6 +64,30 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
   //   </>
   // );
 
+  const renderHeaderButton = () => {
+    return (
+      <>
+        <Tooltip label={colorMode === "light" ? "暗黑模式" : "亮光模式"}>
+          <IconButton
+            icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
+            onClick={toggleColorMode}
+            aria-label={"theme-toggle"}
+          />
+        </Tooltip>
+
+        <Tooltip label={session? '管理员平台': '管理员登入'}>
+          <IconButton
+            icon={session ? <BiUserPin /> : <RiAdminLine />}
+            aria-label="Admin Button"
+            onClick={() =>
+              session ? router.push("/admin/dashboard") : router.push("/login")
+            }
+          />
+        </Tooltip>
+      </>
+    );
+  };
+
   return (
     <Box
       sx={{
@@ -95,7 +120,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
           _hover={{ textDecoration: "none" }}
         >
           <Image src="/logo.png" alt="logo" w="50px" />
-          <Flex direction="column" lineHeight="5">
+          <Flex direction="column" lineHeight="5" display={{base: 'none', md: 'block'}}>
             <Text fontSize="lg" fontWeight="semibold" textStyle="default">
               可爱仓鼠
             </Text>
@@ -106,18 +131,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
         {/* LARGE SCREEN */}
         <HStack as="nav" spacing="4" display={{ base: "none", md: "flex" }}>
           {/* {headerItem} */}
-          <IconButton
-            icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-            onClick={toggleColorMode}
-            aria-label={"theme-toggle"}
-          />
-          <IconButton
-            icon={session ? <BiUserPin /> : <RiAdminLine />}
-            aria-label="Admin Button"
-            onClick={() =>
-              session ? router.push("/admin/dashboard") : router.push("/login")
-            }
-          />
+          {renderHeaderButton()}
         </HStack>
 
         {/* BASE SCREEN */}
@@ -128,18 +142,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
             aria-label={"Open Menu"}
             onClick={isOpen ? onClose : onOpen}
           /> */}
-          <IconButton
-            icon={colorMode === "light" ? <SunIcon /> : <MoonIcon />}
-            onClick={toggleColorMode}
-            aria-label={"theme-toggle"}
-          />
-          <IconButton
-            icon={session ? <BiUserPin /> : <RiAdminLine />}
-            aria-label="Admin Button"
-            onClick={() =>
-              session ? router.push("/admin/dashboard") : router.push("/login")
-            }
-          />
+          {renderHeaderButton()}
         </HStack>
       </Flex>
 

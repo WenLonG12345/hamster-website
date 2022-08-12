@@ -25,13 +25,18 @@ export const adminPageRoutes = [
 ];
 
 export const hamstersName = {
-  HUIHUI: '灰灰',
-  MIMI: '米米',
-  FANSHU: '番薯',
-  MUSHU: '木薯',
-  DOUDOU: '豆豆',
-  XIAOXIAO: '小小',
-  ROUBAOZI: '肉包子',
-  MOMO: '沫沫',
-  MAODOU: '毛豆'
-}
+  HUIHUI: "灰灰",
+  MIMI: "米米",
+  FANSHU: "番薯",
+  MUSHU: "木薯",
+  DOUDOU: "豆豆",
+  XIAOXIAO: "小小",
+  ROUBAOZI: "肉包子",
+  MOMO: "沫沫",
+  MAODOU: "毛豆",
+};
+
+export const serverUrl =
+  process.env.NODE_ENV !== "production"
+    ? "http://localhost:3000"
+    : "https://cute-hamster.vercel.app/";

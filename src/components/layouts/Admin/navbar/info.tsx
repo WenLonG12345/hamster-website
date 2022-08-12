@@ -14,7 +14,7 @@ const Info = (props: StackProps) => {
       onClick={() => router.push("/")}
       cursor="pointer"
     >
-      <Image src="/logo.png" alt="logo" w="50px" />
+      <Image src="/logo.png" alt="logo" w="40px" />
       <Flex direction="column" lineHeight="5">
         <Text fontSize="lg" fontWeight="semibold" textStyle="default">
           可爱仓鼠

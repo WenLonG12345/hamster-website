@@ -27,7 +27,7 @@ import Admin from ".";
 import { useFetchAxios } from "../../utils/common";
 import { getCover, updateCoverDetails } from "../../utils/api";
 import { HamsterCover } from "../../types";
-import PageTemplate from "../../components/layouts/Admin/page-template";
+import PageTemplate from "../../components/layouts/admin/page-template";
 
 const Cover = () => {
   const [files, selectFiles] = useFileUpload();

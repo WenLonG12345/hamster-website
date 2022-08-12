@@ -20,7 +20,7 @@ import {
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
-import MainLayout from "../components/layouts/User/MainLayout";
+import MainLayout from "../components/layouts/user/MainLayout";
 import { useRouter } from "next/router";
 
 const AdminLoginPage = () => {
@@ -73,7 +73,7 @@ const AdminLoginPage = () => {
 
   return (
     <MainLayout>
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6} minH='80vh'>
         <Stack align={"center"}>
           <Heading fontSize={"4xl"}>登入管理员界面</Heading>
           <Text fontSize={"lg"} color={"gray.600"}>

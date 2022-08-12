@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from "querystring";
+
 export type HamsterCoverArgs = {
   coverImg: string;
   title: string;
@@ -24,4 +26,8 @@ export type HamsterPhotoArgs = {
   url: string;
   description?: string;
   hamsterId?: string;
+}
+
+export interface IParams extends ParsedUrlQuery {
+  id: string;
 }

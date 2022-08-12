@@ -17,11 +17,13 @@ const IMAGE =
 type DashbpardHamsterCardProps = {
   name: string;
   href: string;
+  cover: string | null | undefined;
 };
 
 const DashboardHamsterCard: React.FC<DashbpardHamsterCardProps> = ({
   name,
   href,
+  cover
 }) => {
   const router = useRouter();
   return (
@@ -33,7 +35,7 @@ const DashboardHamsterCard: React.FC<DashbpardHamsterCardProps> = ({
       boxShadow={"2xl"}
       rounded={"lg"}
     >
-      <Image rounded={"lg"} objectFit="cover" src={IMAGE} alt={"cover"} />
+      <Image rounded={"lg"} objectFit="cover" src={cover || ""} alt={"cover"} maxH='200px'/>
       <Flex
         alignItems="center"
         justifyContent="center"

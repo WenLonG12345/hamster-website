@@ -11,6 +11,7 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { Hamster } from "@prisma/client";
+import { useRouter } from "next/router";
 import React, { MutableRefObject } from "react";
 import { MotionBox } from "../../motion-box";
 
@@ -27,6 +28,8 @@ const HamsterLayout: React.FC<HamsterLayoutProps> = ({
   const titleColor = useColorModeValue("gray.800", "white");
   const despColor = useColorModeValue("gray.700", "gray.200");
 
+  const router = useRouter();
+
   return (
     <Box mt={20} ref={layoutRef}>
       <Heading fontSize={'3xl'}>🐹仓鼠们🐹</Heading>
@@ -42,6 +45,7 @@ const HamsterLayout: React.FC<HamsterLayoutProps> = ({
                 overflow="hidden"
                 whileHover={{ y: -5 }}
                 cursor="pointer"
+                onClick={() => router.push(`/hamster/${x.id}`)}
               >
                 <Image
                   w="full"
