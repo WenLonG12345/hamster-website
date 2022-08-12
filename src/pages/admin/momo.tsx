@@ -23,9 +23,9 @@ import { useHamsterStore } from "../../hooks/useHamsterStore";
 import HamsterDescriptionModal from "../../components/modals/HamsterDescriptionModal";
 import { Hamster, Photo } from "@prisma/client";
 import HamsterImageModal from "../../components/modals/HamsterImageModal";
-import PageTemplate from "../../components/layouts/admin/page-template";
+import PageTemplate from "../../components/layouts/Admin/page-template";
 import HamsterPhoto from "../../components/HamsterPhoto";
-import EmptyContent from "../../components/layouts/admin/empty-content";
+import EmptyContent from "../../components/layouts/Admin/empty-content";
 import { isEmpty } from "lodash";
 
 const pageName = "沫沫";

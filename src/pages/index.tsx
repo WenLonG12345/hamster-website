@@ -1,11 +1,11 @@
 import { Container } from "@chakra-ui/react";
 import { Hamster } from "@prisma/client";
 import type { NextPage } from "next";
-import MainLayout from "../components/layouts/user/MainLayout";
+import MainLayout from "../components/layouts/User/MainLayout";
 import { getAllHamsters } from "../utils/api";
 import { useFetchAxios } from "../utils/common";
-import HomeLayout from "../components/layouts/user/home-layout";
-import HamsterLayout from "../components/layouts/user/hamster-layout";
+import HomeLayout from "../components/layouts/User/home-layout";
+import HamsterLayout from "../components/layouts/User/hamster-layout";
 import { useRef } from "react";
 import { serverUrl } from "../utils/constants";
 import { IParams } from "../types";

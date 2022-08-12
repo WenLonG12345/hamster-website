@@ -16,9 +16,9 @@ import {
   SimpleGrid,
   Text,
 } from "@chakra-ui/react";
-import MainLayout from "../../components/layouts/user/MainLayout";
-import HamsterDetailHeader from "../../components/layouts/user/details/hamster-detail-header";
-import HamsterDetailPhoto from "../../components/layouts/user/details/hamster-detail-photo";
+import MainLayout from "../../components/layouts/User/MainLayout";
+import HamsterDetailHeader from "../../components/layouts/User/details/hamster-detail-header";
+import HamsterDetailPhoto from "../../components/layouts/User/details/hamster-detail-photo";
 
 type HamsterDetailPage = {
   photos: Photo[];

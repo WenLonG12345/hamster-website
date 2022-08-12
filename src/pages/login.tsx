@@ -20,7 +20,7 @@ import {
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
-import MainLayout from "../components/layouts/user/MainLayout";
+import MainLayout from "../components/layouts/User/MainLayout";
 import { useRouter } from "next/router";
 
 const AdminLoginPage = () => {

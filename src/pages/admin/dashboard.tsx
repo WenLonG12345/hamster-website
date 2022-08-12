@@ -14,9 +14,9 @@ import {
   SimpleGrid,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import DashboardCoverCard from "../../components/layouts/admin/dashboard/cover-card";
+import DashboardCoverCard from "../../components/layouts/Admin/dashboard/cover-card";
 import { adminPageRoutes } from "../../utils/constants";
-import DashboardHamsterCard from "../../components/layouts/admin/dashboard/hamster-card";
+import DashboardHamsterCard from "../../components/layouts/Admin/dashboard/hamster-card";
 import { useHamsterStore } from "../../hooks/useHamsterStore";
 
 const Dashboard = () => {

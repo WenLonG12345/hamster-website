@@ -3,7 +3,7 @@ import { Container, Spinner } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import AdminLayout from "../../components/layouts/admin";
+import AdminLayout from "../../components/layouts/Admin";
 import { useHamsterStore } from "../../hooks/useHamsterStore";
 import { getAllHamsters } from "../../utils/api";
 import { useFetchAxios } from "../../utils/common";
