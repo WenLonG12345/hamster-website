@@ -22,9 +22,9 @@ export default NextAuth({
           credentials?.username === adminUser.username &&
           credentials?.password === adminUser.password
         ) {
-          return adminUser;
+          return {username: adminUser.username};
         } else {
-          return null;
+          throw new Error('用户名和密码无效')
         }
       },
     }),

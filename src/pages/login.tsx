@@ -15,11 +15,13 @@ import {
   Image,
   FormHelperText,
   IconButton,
+  useToast,
 } from "@chakra-ui/react";
 import { BiArrowBack } from "react-icons/bi";
 import { useForm } from "react-hook-form";
 import { signIn, useSession } from "next-auth/react";
 import MainLayout from "../components/layouts/User/MainLayout";
+import { useRouter } from "next/router";
 
 const AdminLoginPage = () => {
   const {
@@ -35,17 +37,38 @@ const AdminLoginPage = () => {
     },
   });
 
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
+  const router = useRouter();
+  const toast = useToast();
 
   const onSubmit = async (v: any) => {
     const res = await signIn("credentials", {
-      redirect: true,
+      redirect: false,
       username: v.username,
       password: v.password,
-      callbackUrl: `${window.location.origin}`,
+      // callbackUrl: `${window.location.origin}`,
     });
 
-    console.log({ res });
+    if (res) {
+      const { ok, error, url } = res;
+      if (ok) {
+        router.replace(window.location.origin);
+        toast({
+          title: "登入成功！",
+          status: "success",
+          isClosable: true,
+          position: "top-right",
+        });
+      } else {
+        toast({
+          title: "登入失败！",
+          description: error,
+          status: "error",
+          isClosable: true,
+          position: "top-right",
+        });
+      }
+    }
   };
 
   return (
