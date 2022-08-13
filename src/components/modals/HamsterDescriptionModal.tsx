@@ -34,16 +34,24 @@ const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
     formState: { errors },
     reset,
     setValue,
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      description: '',
+      cover: '',
+    }
+  });
 
   const toast = useToast();
   const updateHamster = useHamsterStore((state) => state.updateHamster);
 
   useEffect(() => {
     if (data) {
-      setValue("description", data.description);
+      setValue("description", data.description || '');
+      setValue("cover", data.cover || '');
     }
   }, [data]);
+
+  console.log({data})
 
   const onSubmit = async (v: any) => {
     if(data) {
@@ -78,17 +86,16 @@ const HamsterDescriptionModal: React.FC<HamsterDescriptionModalProps> = ({
         <ModalCloseButton />
 
         <ModalBody>
-          <Text mb={3}>描述你可爱的仓鼠🐹</Text>
           <Textarea
             {...register("description", {
               required: "请输入仓鼠描述",
             })}
           />
-          {/* {errors.description && (
+          {errors.description && (
             <Text>
               {errors.description.message}
             </Text>
-          )} */}
+          )}
         </ModalBody>
 
         <ModalFooter>

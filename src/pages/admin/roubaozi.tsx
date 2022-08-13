@@ -27,6 +27,7 @@ import PageTemplate from "../../components/layouts/Admin/page-template";
 import HamsterPhoto from "../../components/HamsterPhoto";
 import EmptyContent from "../../components/layouts/Admin/empty-content";
 import { isEmpty } from "lodash";
+import HamsterDetailHeader from "../../components/layouts/User/details/hamster-detail-header";
 
 const pageName = "肉包子";
 
@@ -76,69 +77,51 @@ const RouBaoZi = () => {
       <PageTemplate
         title={pageName}
         actions={
-          <HStack>
-            <Button
-              leftIcon={<AiFillEdit />}
-              size="md"
-              onClick={() => {
+          <Button
+            colorScheme="purple"
+            size="md"
+            isLoading={photoSelect}
+            leftIcon={<AiOutlinePlus />}
+            onClick={() => {
+              setPhotoSelect(true);
+              showUploadWidget([pageName], async (data) => {
+                const { event, info } = data;
+
+                if (event === "success") {
+                  // successfully upload images
+                  const { secure_url } = info;
+                  console.log({ info }, { secure_url });
+                  const res = await uploadHamsterImage({
+                    hamsterId: hamster?.id,
+                    url: secure_url,
+                  });
+
+                  if (hamster) {
+                    getPhotos(hamster.id);
+                  }
+                }
+
+                if (event === "close") {
+                  // user close modal dialog
+                  setPhotoSelect(false);
+                }
+              });
+            }}
+          >
+            添加
+          </Button>
+        }
+        content={
+          <>
+            <HamsterDetailHeader
+              hamster={hamster}
+              isAdmin
+              setEdit={(hamster) => {
                 if (hamster) {
                   setEditHamster(hamster);
                 }
               }}
-            >
-              编辑描述
-            </Button>
-            <Button
-              colorScheme="purple"
-              size="md"
-              isLoading={photoSelect}
-              leftIcon={<AiOutlinePlus />}
-              onClick={() => {
-                setPhotoSelect(true);
-                showUploadWidget([pageName], async (data) => {
-                  const { event, info } = data;
-
-                  if (event === "success") {
-                    // successfully upload images
-                    const { secure_url } = info;
-                    console.log({ info }, { secure_url });
-                    const res = await uploadHamsterImage({
-                      hamsterId: hamster?.id,
-                      url: secure_url,
-                    });
-
-                    if (hamster) {
-                      getPhotos(hamster.id);
-                    }
-                  }
-
-                  if (event === "close") {
-                    // user close modal dialog
-                    setPhotoSelect(false);
-                  }
-                });
-              }}
-            >
-              添加
-            </Button>
-          </HStack>
-        }
-        content={
-          <>
-            <Box
-              mb={3}
-              bg={useColorModeValue("purple.300", "purple.700")}
-              p={3}
-              borderRadius="8px"
-            >
-              <Text color="white" fontWeight="bold">
-                仓鼠描述
-              </Text>
-              <Text color="white" fontWeight="500">
-                {hamster?.description}
-              </Text>
-            </Box>
-
+            />
             {renderPhoto()}
           </>
         }
@@ -161,6 +144,6 @@ const RouBaoZi = () => {
       />
     </>
   );
-}
+};
 
-export default withLayout(<Admin/>)(RouBaoZi);
+export default withLayout(<Admin />)(RouBaoZi);

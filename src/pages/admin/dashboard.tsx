@@ -24,8 +24,6 @@ const Dashboard = () => {
 
   const allHamster = useHamsterStore((state) => state.hamsters);
 
-  console.log(allHamster.length, adminPageRoutes.length)
-
   return (
     <Stack>
       <DashboardCoverCard />

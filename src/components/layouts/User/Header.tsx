@@ -122,7 +122,7 @@ const Header: React.FC<HeaderProps> = ({ ...headerProps }) => {
           <Image src="/logo.png" alt="logo" w="50px" />
           <Flex direction="column" lineHeight="5" display={{base: 'none', md: 'block'}}>
             <Text fontSize="lg" fontWeight="semibold" textStyle="default">
-              可爱仓鼠
+              Penny小宠
             </Text>
             <Text fontSize="sm">精彩你的每一天 ❤️</Text>
           </Flex>

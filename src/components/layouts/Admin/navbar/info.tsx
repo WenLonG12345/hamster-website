@@ -17,7 +17,7 @@ const Info = (props: StackProps) => {
       <Image src="/logo.png" alt="logo" w="40px" />
       <Flex direction="column" lineHeight="5">
         <Text fontSize="lg" fontWeight="semibold" textStyle="default">
-          可爱仓鼠
+          Penny小宠
         </Text>
         <Text fontSize="sm">仓鼠管理界面</Text>
       </Flex>
